@@ -1,0 +1,44 @@
+---
+import '../styles/theme.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  organizationName: string;
+  generatedAt: string;
+}
+
+const { title, description, organizationName, generatedAt } = Astro.props;
+const generatedLabel = new Date(generatedAt);
+const generatedText = Number.isNaN(generatedLabel.getTime())
+  ? generatedAt
+  : new Intl.DateTimeFormat('en', {
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit'
+    }).format(generatedLabel);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="header-shell">
+        <a class="brand" href="/">
+          <span class="brand-kicker">Open Source Atlas</span>
+          <strong class="brand-name">{organizationName}</strong>
+        </a>
+        <p class="generated-at">Updated {generatedText}</p>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>
