@@ -1,0 +1,22 @@
+{
+  "name": "oss-atlas",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {
+    "oss-atlas": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@oss-atlas/core": "workspace:*",
+    "cac": "^6.7.14"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1"
+  }
+}
