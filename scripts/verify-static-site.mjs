@@ -23,6 +23,26 @@ const checks = [
       'accessibility',
       'href="/oss-atlas/"'
     ]
+  },
+  {
+    file: 'apps/web/dist/ko/index.html',
+    expected: [
+      '오픈소스 아틀라스',
+      '조직 개요',
+      '추천 프로젝트',
+      '기여 태그',
+      'href="/oss-atlas/ko/projects/atlas-web/"'
+    ]
+  },
+  {
+    file: 'apps/web/dist/ko/projects/atlas-web/index.html',
+    expected: [
+      '프로젝트 상세',
+      '기여 아틀라스',
+      '메인테이너',
+      'href="/oss-atlas/ko/"',
+      'href="/oss-atlas/projects/atlas-web/"'
+    ]
   }
 ];
 
