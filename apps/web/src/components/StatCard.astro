@@ -1,0 +1,13 @@
+---
+interface Props {
+  label: string;
+  value: number;
+}
+
+const { label, value } = Astro.props;
+---
+
+<article class="stat-card">
+  <p class="stat-label">{label}</p>
+  <p class="stat-value">{value.toLocaleString('en-US')}</p>
+</article>

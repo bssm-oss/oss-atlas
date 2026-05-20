@@ -1,0 +1,31 @@
+---
+import type { AtlasProject } from '../types/atlas';
+import { formatDate } from '../lib/atlas';
+
+interface Props {
+  project: AtlasProject;
+  showCategory?: boolean;
+}
+
+const { project, showCategory = true } = Astro.props;
+---
+
+<article class="project-card">
+  <div class="project-top">
+    <a class="project-name" href={`/projects/${project.name}/`}>{project.name}</a>
+    <span class="status-pill" data-status={project.status}>{project.status}</span>
+  </div>
+
+  <p class="project-pitch">{project.pitch}</p>
+
+  {project.description && <p class="project-description">{project.description}</p>}
+
+  <div class="project-meta">
+    {showCategory && <span class="tag">{project.category}</span>}
+    {project.language && <span class="tag">{project.language}</span>}
+    {project.difficulty && <span class="tag">{project.difficulty}</span>}
+    <span class="tag">{project.stars} stars</span>
+    <span class="tag">{project.forks} forks</span>
+    <span class="tag">Updated {formatDate(project.pushedAt ?? project.updatedAt)}</span>
+  </div>
+</article>

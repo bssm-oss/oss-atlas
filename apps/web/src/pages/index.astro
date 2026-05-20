@@ -1,0 +1,147 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import StatCard from '../components/StatCard.astro';
+import {
+  activeProjects,
+  atlas,
+  contributionTags,
+  featuredProjects,
+  projectsByCategory,
+  recentProjects
+} from '../lib/atlas';
+---
+
+<BaseLayout
+  title={`${atlas.organization.name} | Open Source Atlas`}
+  description={atlas.organization.description}
+  organizationName={atlas.organization.name}
+  generatedAt={atlas.generatedAt}
+>
+  <section class="hero" aria-labelledby="organization-heading">
+    <p class="hero-kicker">Organization Overview</p>
+    <h1 id="organization-heading">{atlas.organization.name}</h1>
+    <p>{atlas.organization.description ?? 'A generated atlas of repositories, contribution pathways, and project health.'}</p>
+    {atlas.organization.url && (
+      <p style="margin-top: var(--space-4);">
+        <a href={atlas.organization.url}>Visit organization profile</a>
+      </p>
+    )}
+  </section>
+
+  <section class="section" aria-labelledby="stats-title">
+    <div class="section-heading">
+      <h2 class="section-title" id="stats-title">Atlas Statistics</h2>
+      <p class="section-note">Repository signals at a glance</p>
+    </div>
+    <div class="stat-grid">
+      <StatCard label="Total Repositories" value={atlas.stats.totalRepos} />
+      <StatCard label="Featured Repositories" value={atlas.stats.featuredRepos} />
+      <StatCard label="Active Repositories" value={atlas.stats.activeRepos} />
+      <StatCard label="Contribution Ready" value={atlas.stats.contributionReadyRepos} />
+      <StatCard label="Archived Repositories" value={atlas.stats.archivedRepos} />
+    </div>
+
+    {atlas.warnings.length > 0 && (
+      <ul class="warning-list" style="margin-top: var(--space-5);">
+        {atlas.warnings.map((warning) => (
+          <li>{warning}</li>
+        ))}
+      </ul>
+    )}
+  </section>
+
+  <section class="section" aria-labelledby="featured-title">
+    <div class="section-heading">
+      <h2 class="section-title" id="featured-title">Featured Projects</h2>
+      <p class="section-note">High-impact repositories in the organization atlas</p>
+    </div>
+    {featuredProjects.length > 0 ? (
+      <div class="project-grid">
+        {featuredProjects.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+    ) : (
+      <p class="empty-note">No featured projects yet.</p>
+    )}
+  </section>
+
+  <section class="section" aria-labelledby="activity-title">
+    <div class="section-heading">
+      <h2 class="section-title" id="activity-title">Active and Recent Projects</h2>
+      <p class="section-note">Live activity and latest delivery cadence</p>
+    </div>
+
+    <div class="duo-grid">
+      <article class="category-card" aria-labelledby="active-projects-title">
+        <h3 id="active-projects-title">Currently Active</h3>
+        <ul>
+          {activeProjects.slice(0, 8).map((project) => (
+            <li>
+              <a href={`/projects/${project.name}/`}>{project.name}</a>
+              <span>{project.stars} stars</span>
+            </li>
+          ))}
+        </ul>
+        {activeProjects.length === 0 && <p class="empty-note" style="margin-top: var(--space-3);">No active projects listed.</p>}
+      </article>
+
+      <article class="category-card" aria-labelledby="recent-projects-title">
+        <h3 id="recent-projects-title">Recently Updated</h3>
+        <ul>
+          {recentProjects.map((project) => (
+            <li>
+              <a href={`/projects/${project.name}/`}>{project.name}</a>
+              <span>{project.language ?? 'n/a'}</span>
+            </li>
+          ))}
+        </ul>
+        {recentProjects.length === 0 && <p class="empty-note" style="margin-top: var(--space-3);">No recent update data available.</p>}
+      </article>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="categories-title">
+    <div class="section-heading">
+      <h2 class="section-title" id="categories-title">Repository Categories</h2>
+      <p class="section-note">Grouped by domain and responsibility</p>
+    </div>
+
+    <div class="project-grid">
+      {projectsByCategory.map((category) => (
+        <article class="category-card">
+          <h3>{category.name}</h3>
+          <p class="section-note">{category.count} repositories</p>
+          <ul>
+            {category.projects.slice(0, 4).map((project) => (
+              <li>
+                <a href={`/projects/${project.name}/`}>{project.name}</a>
+                <span>{project.status}</span>
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="contribution-title">
+    <div class="section-heading">
+      <h2 class="section-title" id="contribution-title">Contribution Tags</h2>
+      <p class="section-note">Common contributor entry points across projects</p>
+    </div>
+
+    {contributionTags.length > 0 ? (
+      <div class="tag-card">
+        <div class="contribution-cloud">
+          {contributionTags.map((tag) => (
+            <span class="tag">{tag.name} ({tag.count})</span>
+          ))}
+        </div>
+      </div>
+    ) : (
+      <p class="empty-note">No contribution tags available.</p>
+    )}
+  </section>
+</BaseLayout>
