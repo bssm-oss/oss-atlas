@@ -8,11 +8,14 @@ interface Props {
 }
 
 const { project, showCategory = true } = Astro.props;
+const rawBaseUrl = import.meta.env.BASE_URL;
+const baseUrl = rawBaseUrl.endsWith('/') ? rawBaseUrl : `${rawBaseUrl}/`;
+const projectHref = `${baseUrl}projects/${project.name}/`;
 ---
 
 <article class="project-card">
   <div class="project-top">
-    <a class="project-name" href={`/projects/${project.name}/`}>{project.name}</a>
+    <a class="project-name" href={projectHref}>{project.name}</a>
     <span class="status-pill" data-status={project.status}>{project.status}</span>
   </div>
 

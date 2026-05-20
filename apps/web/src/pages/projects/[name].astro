@@ -11,6 +11,9 @@ export function getStaticPaths() {
 }
 
 const { project } = Astro.props;
+const rawBaseUrl = import.meta.env.BASE_URL;
+const baseUrl = rawBaseUrl.endsWith('/') ? rawBaseUrl : `${rawBaseUrl}/`;
+const projectHref = (name: string) => `${baseUrl}projects/${name}/`;
 const related = project.relatedRepos
   .map((repoName: string) => projectByName.get(repoName))
   .filter((repo): repo is AtlasProject => Boolean(repo));
@@ -23,7 +26,7 @@ const related = project.relatedRepos
   generatedAt={atlas.generatedAt}
 >
   <p style="margin-top: var(--space-6);">
-    <a href="/">Back to atlas overview</a>
+    <a href={baseUrl}>Back to atlas overview</a>
   </p>
 
   <section class="detail-header" aria-labelledby="project-detail-title">
@@ -157,7 +160,7 @@ const related = project.relatedRepos
         {related.map((repo) => (
           <article class="project-card">
             <div class="project-top">
-              <a class="project-name" href={`/projects/${repo.name}/`}>{repo.name}</a>
+              <a class="project-name" href={projectHref(repo.name)}>{repo.name}</a>
               <span class="status-pill" data-status={repo.status}>{repo.status}</span>
             </div>
             <p class="project-pitch">{repo.pitch}</p>

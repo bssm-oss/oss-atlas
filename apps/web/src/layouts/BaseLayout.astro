@@ -9,6 +9,8 @@ interface Props {
 }
 
 const { title, description, organizationName, generatedAt } = Astro.props;
+const rawBaseUrl = import.meta.env.BASE_URL;
+const baseUrl = rawBaseUrl.endsWith('/') ? rawBaseUrl : `${rawBaseUrl}/`;
 const generatedLabel = new Date(generatedAt);
 const generatedText = Number.isNaN(generatedLabel.getTime())
   ? generatedAt
@@ -30,7 +32,7 @@ const generatedText = Number.isNaN(generatedLabel.getTime())
   <body>
     <header class="page-header">
       <div class="header-shell">
-        <a class="brand" href="/">
+        <a class="brand" href={baseUrl}>
           <span class="brand-kicker">Open Source Atlas</span>
           <strong class="brand-name">{organizationName}</strong>
         </a>

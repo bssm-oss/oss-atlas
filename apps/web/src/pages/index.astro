@@ -10,6 +10,10 @@ import {
   projectsByCategory,
   recentProjects
 } from '../lib/atlas';
+
+const rawBaseUrl = import.meta.env.BASE_URL;
+const baseUrl = rawBaseUrl.endsWith('/') ? rawBaseUrl : `${rawBaseUrl}/`;
+const projectHref = (name: string) => `${baseUrl}projects/${name}/`;
 ---
 
 <BaseLayout
@@ -79,7 +83,7 @@ import {
         <ul>
           {activeProjects.slice(0, 8).map((project) => (
             <li>
-              <a href={`/projects/${project.name}/`}>{project.name}</a>
+              <a href={projectHref(project.name)}>{project.name}</a>
               <span>{project.stars} stars</span>
             </li>
           ))}
@@ -92,7 +96,7 @@ import {
         <ul>
           {recentProjects.map((project) => (
             <li>
-              <a href={`/projects/${project.name}/`}>{project.name}</a>
+              <a href={projectHref(project.name)}>{project.name}</a>
               <span>{project.language ?? 'n/a'}</span>
             </li>
           ))}
@@ -116,7 +120,7 @@ import {
           <ul>
             {category.projects.slice(0, 4).map((project) => (
               <li>
-                <a href={`/projects/${project.name}/`}>{project.name}</a>
+                <a href={projectHref(project.name)}>{project.name}</a>
                 <span>{project.status}</span>
               </li>
             ))}
