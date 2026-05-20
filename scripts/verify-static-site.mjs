@@ -9,7 +9,8 @@ const checks = [
       'Featured Projects',
       'Contribution Tags',
       'atlas-web',
-      'good first issue'
+      'good first issue',
+      'href="/oss-atlas/projects/atlas-web/"'
     ]
   },
   {
@@ -19,7 +20,8 @@ const checks = [
       'atlas-web',
       'Contribution Atlas',
       'documentation',
-      'accessibility'
+      'accessibility',
+      'href="/oss-atlas/"'
     ]
   }
 ];
