@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { atlas, formatDate, projectByName } from '../../lib/atlas';
+import { atlas, projectByName } from '../../lib/atlas';
+import { dictionaries, formatDateByLocale, homePath, projectPath, type Locale } from '../../lib/i18n';
 import type { AtlasProject } from '../../types/atlas';
 
 export function getStaticPaths() {
@@ -11,26 +12,28 @@ export function getStaticPaths() {
 }
 
 const { project } = Astro.props;
+const lang: Locale = 'en';
+const t = dictionaries[lang];
 const rawBaseUrl = import.meta.env.BASE_URL;
-const baseUrl = rawBaseUrl.endsWith('/') ? rawBaseUrl : `${rawBaseUrl}/`;
-const projectHref = (name: string) => `${baseUrl}projects/${name}/`;
 const related = project.relatedRepos
   .map((repoName: string) => projectByName.get(repoName))
   .filter((repo): repo is AtlasProject => Boolean(repo));
 ---
 
 <BaseLayout
-  title={`${project.name} | ${atlas.organization.name} Atlas`}
+  title={`${project.name} | ${atlas.organization.name} ${t.project.titleSuffix}`}
   description={project.pitch}
   organizationName={atlas.organization.name}
   generatedAt={atlas.generatedAt}
+  lang={lang}
+  currentProjectName={project.name}
 >
   <p style="margin-top: var(--space-6);">
-    <a href={baseUrl}>Back to atlas overview</a>
+    <a href={homePath(lang, rawBaseUrl)}>{t.project.backToOverview}</a>
   </p>
 
   <section class="detail-header" aria-labelledby="project-detail-title">
-    <p class="detail-subtitle">Project Detail</p>
+    <p class="detail-subtitle">{t.project.detailSubtitle}</p>
     <h1 id="project-detail-title" class="detail-title">{project.name}</h1>
     <p class="detail-text">{project.pitch}</p>
     {project.description && <p class="detail-text">{project.description}</p>}
@@ -43,43 +46,43 @@ const related = project.relatedRepos
     </div>
   </section>
 
-  <section class="detail-shell" aria-label="project metadata and contribution details">
+  <section class="detail-shell" aria-label={t.project.metadataAriaLabel}>
     <article class="detail-panel">
-      <h2>Project Metadata</h2>
+      <h2>{t.project.metadataTitle}</h2>
       <div class="meta-list" style="margin-top: var(--space-4);">
         <div class="meta-row">
-          <span class="meta-label">Repository</span>
+          <span class="meta-label">{t.project.metaRepository}</span>
           <span class="meta-value">{project.fullName}</span>
         </div>
         <div class="meta-row">
-          <span class="meta-label">Stars</span>
+          <span class="meta-label">{t.project.metaStars}</span>
           <span class="meta-value">{project.stars}</span>
         </div>
         <div class="meta-row">
-          <span class="meta-label">Forks</span>
+          <span class="meta-label">{t.project.metaForks}</span>
           <span class="meta-value">{project.forks}</span>
         </div>
         <div class="meta-row">
-          <span class="meta-label">License</span>
-          <span class="meta-value">{project.license ?? 'Not declared'}</span>
+          <span class="meta-label">{t.project.metaLicense}</span>
+          <span class="meta-value">{project.license ?? t.project.notDeclared}</span>
         </div>
         <div class="meta-row">
-          <span class="meta-label">Last push</span>
-          <span class="meta-value">{formatDate(project.pushedAt ?? project.updatedAt)}</span>
+          <span class="meta-label">{t.project.metaLastPush}</span>
+          <span class="meta-value">{formatDateByLocale(project.pushedAt ?? project.updatedAt, lang)}</span>
         </div>
       </div>
 
       <div style="margin-top: var(--space-5); display: flex; flex-wrap: wrap; gap: var(--space-3);">
-        <a href={project.url}>Repository</a>
-        {project.homepageUrl && <a href={project.homepageUrl}>Homepage</a>}
+        <a href={project.url}>{t.project.repositoryLink}</a>
+        {project.homepageUrl && <a href={project.homepageUrl}>{t.project.homepageLink}</a>}
       </div>
     </article>
 
     <article class="detail-panel">
-      <h2>Contribution Atlas</h2>
-      <p class="section-note" style="margin-top: var(--space-2);">Maintainers and contributor entry points</p>
+      <h2>{t.project.contributionAtlasTitle}</h2>
+      <p class="section-note" style="margin-top: var(--space-2);">{t.project.contributionAtlasNote}</p>
 
-      <h3 style="margin-top: var(--space-4);">Maintainers</h3>
+      <h3 style="margin-top: var(--space-4);">{t.project.maintainersTitle}</h3>
       {project.maintainers.length > 0 ? (
         <div class="contribution-cloud" style="margin-top: var(--space-3);">
           {project.maintainers.map((maintainer: string) => (
@@ -87,10 +90,10 @@ const related = project.relatedRepos
           ))}
         </div>
       ) : (
-        <p class="empty-note" style="margin-top: var(--space-3);">No maintainers listed.</p>
+        <p class="empty-note" style="margin-top: var(--space-3);">{t.project.maintainersEmpty}</p>
       )}
 
-      <h3 style="margin-top: var(--space-5);">Contribution Tags</h3>
+      <h3 style="margin-top: var(--space-5);">{t.project.contributionTagsTitle}</h3>
       {project.contribution.length > 0 ? (
         <div class="contribution-cloud" style="margin-top: var(--space-3);">
           {project.contribution.map((tag: string) => (
@@ -98,10 +101,10 @@ const related = project.relatedRepos
           ))}
         </div>
       ) : (
-        <p class="empty-note" style="margin-top: var(--space-3);">No contribution tags listed.</p>
+        <p class="empty-note" style="margin-top: var(--space-3);">{t.project.contributionTagsEmpty}</p>
       )}
 
-      <h3 style="margin-top: var(--space-5);">Contribution Signals</h3>
+      <h3 style="margin-top: var(--space-5);">{t.project.contributionSignalsTitle}</h3>
       {project.contributionSignals.length > 0 ? (
         <div class="contribution-cloud" style="margin-top: var(--space-3);">
           {project.contributionSignals.map((signal: string) => (
@@ -109,20 +112,20 @@ const related = project.relatedRepos
           ))}
         </div>
       ) : (
-        <p class="empty-note" style="margin-top: var(--space-3);">No contribution signals listed.</p>
+        <p class="empty-note" style="margin-top: var(--space-3);">{t.project.contributionSignalsEmpty}</p>
       )}
     </article>
   </section>
 
   <section class="section" aria-labelledby="taxonomy-title">
     <div class="section-heading">
-      <h2 class="section-title" id="taxonomy-title">Taxonomy</h2>
-      <p class="section-note">Topics and stack references</p>
+      <h2 class="section-title" id="taxonomy-title">{t.project.taxonomyTitle}</h2>
+      <p class="section-note">{t.project.taxonomyNote}</p>
     </div>
 
     <div class="duo-grid">
       <article class="tag-card">
-        <h3>Topics</h3>
+        <h3>{t.project.topicsTitle}</h3>
         {project.topics.length > 0 ? (
           <div class="contribution-cloud" style="margin-top: var(--space-3);">
             {project.topics.map((topic: string) => (
@@ -130,12 +133,12 @@ const related = project.relatedRepos
             ))}
           </div>
         ) : (
-          <p class="empty-note" style="margin-top: var(--space-3);">No topics detected.</p>
+          <p class="empty-note" style="margin-top: var(--space-3);">{t.project.topicsEmpty}</p>
         )}
       </article>
 
       <article class="tag-card">
-        <h3>Tech Stack</h3>
+        <h3>{t.project.techStackTitle}</h3>
         {project.techStack.length > 0 ? (
           <div class="contribution-cloud" style="margin-top: var(--space-3);">
             {project.techStack.map((item: string) => (
@@ -143,7 +146,7 @@ const related = project.relatedRepos
             ))}
           </div>
         ) : (
-          <p class="empty-note" style="margin-top: var(--space-3);">No stack metadata detected.</p>
+          <p class="empty-note" style="margin-top: var(--space-3);">{t.project.techStackEmpty}</p>
         )}
       </article>
     </div>
@@ -151,8 +154,8 @@ const related = project.relatedRepos
 
   <section class="section" aria-labelledby="related-title">
     <div class="section-heading">
-      <h2 class="section-title" id="related-title">Related Repositories</h2>
-      <p class="section-note">Known links in the organization graph</p>
+      <h2 class="section-title" id="related-title">{t.project.relatedTitle}</h2>
+      <p class="section-note">{t.project.relatedNote}</p>
     </div>
 
     {related.length > 0 ? (
@@ -160,7 +163,7 @@ const related = project.relatedRepos
         {related.map((repo) => (
           <article class="project-card">
             <div class="project-top">
-              <a class="project-name" href={projectHref(repo.name)}>{repo.name}</a>
+              <a class="project-name" href={projectPath(lang, repo.name, rawBaseUrl)}>{repo.name}</a>
               <span class="status-pill" data-status={repo.status}>{repo.status}</span>
             </div>
             <p class="project-pitch">{repo.pitch}</p>
@@ -168,7 +171,7 @@ const related = project.relatedRepos
         ))}
       </div>
     ) : (
-      <p class="empty-note">No related repositories were declared.</p>
+      <p class="empty-note">{t.project.relatedEmpty}</p>
     )}
   </section>
 </BaseLayout>

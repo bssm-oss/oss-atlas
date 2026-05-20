@@ -10,40 +10,42 @@ import {
   projectsByCategory,
   recentProjects
 } from '../lib/atlas';
+import { dictionaries, projectPath, type Locale } from '../lib/i18n';
 
-const rawBaseUrl = import.meta.env.BASE_URL;
-const baseUrl = rawBaseUrl.endsWith('/') ? rawBaseUrl : `${rawBaseUrl}/`;
-const projectHref = (name: string) => `${baseUrl}projects/${name}/`;
+const lang: Locale = 'en';
+const t = dictionaries[lang];
+const projectHref = (name: string) => projectPath(lang, name, import.meta.env.BASE_URL);
 ---
 
 <BaseLayout
-  title={`${atlas.organization.name} | Open Source Atlas`}
+  title={`${atlas.organization.name} | ${t.home.titleSuffix}`}
   description={atlas.organization.description}
   organizationName={atlas.organization.name}
   generatedAt={atlas.generatedAt}
+  lang={lang}
 >
   <section class="hero" aria-labelledby="organization-heading">
-    <p class="hero-kicker">Organization Overview</p>
+    <p class="hero-kicker">{t.home.heroKicker}</p>
     <h1 id="organization-heading">{atlas.organization.name}</h1>
-    <p>{atlas.organization.description ?? 'A generated atlas of repositories, contribution pathways, and project health.'}</p>
+    <p>{atlas.organization.description ?? t.home.fallbackDescription}</p>
     {atlas.organization.url && (
       <p style="margin-top: var(--space-4);">
-        <a href={atlas.organization.url}>Visit organization profile</a>
+        <a href={atlas.organization.url}>{t.home.visitOrganizationProfile}</a>
       </p>
     )}
   </section>
 
   <section class="section" aria-labelledby="stats-title">
     <div class="section-heading">
-      <h2 class="section-title" id="stats-title">Atlas Statistics</h2>
-      <p class="section-note">Repository signals at a glance</p>
+      <h2 class="section-title" id="stats-title">{t.home.statsTitle}</h2>
+      <p class="section-note">{t.home.statsNote}</p>
     </div>
     <div class="stat-grid">
-      <StatCard label="Total Repositories" value={atlas.stats.totalRepos} />
-      <StatCard label="Featured Repositories" value={atlas.stats.featuredRepos} />
-      <StatCard label="Active Repositories" value={atlas.stats.activeRepos} />
-      <StatCard label="Contribution Ready" value={atlas.stats.contributionReadyRepos} />
-      <StatCard label="Archived Repositories" value={atlas.stats.archivedRepos} />
+      <StatCard label={t.home.statTotalRepositories} value={atlas.stats.totalRepos} lang={lang} />
+      <StatCard label={t.home.statFeaturedRepositories} value={atlas.stats.featuredRepos} lang={lang} />
+      <StatCard label={t.home.statActiveRepositories} value={atlas.stats.activeRepos} lang={lang} />
+      <StatCard label={t.home.statContributionReady} value={atlas.stats.contributionReadyRepos} lang={lang} />
+      <StatCard label={t.home.statArchivedRepositories} value={atlas.stats.archivedRepos} lang={lang} />
     </div>
 
     {atlas.warnings.length > 0 && (
@@ -57,66 +59,66 @@ const projectHref = (name: string) => `${baseUrl}projects/${name}/`;
 
   <section class="section" aria-labelledby="featured-title">
     <div class="section-heading">
-      <h2 class="section-title" id="featured-title">Featured Projects</h2>
-      <p class="section-note">High-impact repositories in the organization atlas</p>
+      <h2 class="section-title" id="featured-title">{t.home.featuredTitle}</h2>
+      <p class="section-note">{t.home.featuredNote}</p>
     </div>
     {featuredProjects.length > 0 ? (
       <div class="project-grid">
         {featuredProjects.map((project) => (
-          <ProjectCard project={project} />
+          <ProjectCard project={project} lang={lang} />
         ))}
       </div>
     ) : (
-      <p class="empty-note">No featured projects yet.</p>
+      <p class="empty-note">{t.home.featuredEmpty}</p>
     )}
   </section>
 
   <section class="section" aria-labelledby="activity-title">
     <div class="section-heading">
-      <h2 class="section-title" id="activity-title">Active and Recent Projects</h2>
-      <p class="section-note">Live activity and latest delivery cadence</p>
+      <h2 class="section-title" id="activity-title">{t.home.activityTitle}</h2>
+      <p class="section-note">{t.home.activityNote}</p>
     </div>
 
     <div class="duo-grid">
       <article class="category-card" aria-labelledby="active-projects-title">
-        <h3 id="active-projects-title">Currently Active</h3>
+        <h3 id="active-projects-title">{t.home.activeNowTitle}</h3>
         <ul>
           {activeProjects.slice(0, 8).map((project) => (
             <li>
               <a href={projectHref(project.name)}>{project.name}</a>
-              <span>{project.stars} stars</span>
+              <span>{project.stars} {t.card.stars}</span>
             </li>
           ))}
         </ul>
-        {activeProjects.length === 0 && <p class="empty-note" style="margin-top: var(--space-3);">No active projects listed.</p>}
+        {activeProjects.length === 0 && <p class="empty-note" style="margin-top: var(--space-3);">{t.home.activeEmpty}</p>}
       </article>
 
       <article class="category-card" aria-labelledby="recent-projects-title">
-        <h3 id="recent-projects-title">Recently Updated</h3>
+        <h3 id="recent-projects-title">{t.home.recentlyUpdatedTitle}</h3>
         <ul>
           {recentProjects.map((project) => (
             <li>
               <a href={projectHref(project.name)}>{project.name}</a>
-              <span>{project.language ?? 'n/a'}</span>
+              <span>{project.language ?? t.home.noLanguage}</span>
             </li>
           ))}
         </ul>
-        {recentProjects.length === 0 && <p class="empty-note" style="margin-top: var(--space-3);">No recent update data available.</p>}
+        {recentProjects.length === 0 && <p class="empty-note" style="margin-top: var(--space-3);">{t.home.recentEmpty}</p>}
       </article>
     </div>
   </section>
 
   <section class="section" aria-labelledby="categories-title">
     <div class="section-heading">
-      <h2 class="section-title" id="categories-title">Repository Categories</h2>
-      <p class="section-note">Grouped by domain and responsibility</p>
+      <h2 class="section-title" id="categories-title">{t.home.categoriesTitle}</h2>
+      <p class="section-note">{t.home.categoriesNote}</p>
     </div>
 
     <div class="project-grid">
       {projectsByCategory.map((category) => (
         <article class="category-card">
           <h3>{category.name}</h3>
-          <p class="section-note">{category.count} repositories</p>
+          <p class="section-note">{category.count} {t.home.repositoriesCount}</p>
           <ul>
             {category.projects.slice(0, 4).map((project) => (
               <li>
@@ -132,8 +134,8 @@ const projectHref = (name: string) => `${baseUrl}projects/${name}/`;
 
   <section class="section" aria-labelledby="contribution-title">
     <div class="section-heading">
-      <h2 class="section-title" id="contribution-title">Contribution Tags</h2>
-      <p class="section-note">Common contributor entry points across projects</p>
+      <h2 class="section-title" id="contribution-title">{t.home.contributionTagsTitle}</h2>
+      <p class="section-note">{t.home.contributionTagsNote}</p>
     </div>
 
     {contributionTags.length > 0 ? (
@@ -145,7 +147,7 @@ const projectHref = (name: string) => `${baseUrl}projects/${name}/`;
         </div>
       </div>
     ) : (
-      <p class="empty-note">No contribution tags available.</p>
+      <p class="empty-note">{t.home.contributionTagsEmpty}</p>
     )}
   </section>
 </BaseLayout>
