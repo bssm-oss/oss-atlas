@@ -14,8 +14,9 @@
   --sun: #ffd27f;
   --danger: #ff8aa5;
 
-  --font-display: "Didot", "Bodoni MT", "Times New Roman", serif;
-  --font-body: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Garamond, serif;
+  --font-display: "SF Pro Display", "SF Pro Text", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "SF Pro Text", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "SF Mono", "Cascadia Mono", "JetBrains Mono", Menlo, Consolas, "D2Coding", "Noto Sans Mono CJK KR", monospace;
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -57,6 +58,8 @@ body {
     var(--bg);
   color: var(--text);
   font-family: var(--font-body);
+  font-weight: 400;
+  letter-spacing: 0;
   line-height: 1.62;
 }
 
@@ -88,9 +91,10 @@ h2,
 h3,
 h4 {
   margin: 0;
-  line-height: 1.16;
+  line-height: 1.2;
   font-family: var(--font-display);
-  letter-spacing: 0.01em;
+  font-weight: 650;
+  letter-spacing: 0;
 }
 
 p {
@@ -132,7 +136,7 @@ ul {
 .brand-kicker {
   color: var(--text-subtle);
   font-size: 0.72rem;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
 }
 
@@ -145,6 +149,8 @@ ul {
 .generated-at {
   color: var(--text-subtle);
   font-size: 0.83rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.01em;
 }
 
 .hero {
@@ -229,14 +235,16 @@ ul {
 .stat-label {
   color: var(--text-subtle);
   font-size: 0.78rem;
-  letter-spacing: 0.11em;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
   margin-bottom: var(--space-2);
 }
 
 .stat-value {
   font-size: clamp(1.6rem, 2.4vw, 2.35rem);
-  font-family: var(--font-display);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .project-grid {
@@ -265,6 +273,8 @@ ul {
 .project-name {
   font-family: var(--font-display);
   font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.003em;
   text-decoration: none;
   color: var(--text);
 }
@@ -295,6 +305,8 @@ ul {
   border-radius: var(--radius-pill);
   padding: 0.18rem 0.62rem;
   font-size: 0.78rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.01em;
   color: var(--text-muted);
 }
 
@@ -372,7 +384,7 @@ ul {
 .detail-subtitle {
   color: var(--text-subtle);
   font-size: 0.85rem;
-  letter-spacing: 0.09em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -403,6 +415,8 @@ ul {
 
 .meta-value {
   color: var(--text);
+  font-family: var(--font-mono);
+  letter-spacing: 0.005em;
   text-align: right;
 }
 
