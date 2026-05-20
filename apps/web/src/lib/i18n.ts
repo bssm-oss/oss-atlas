@@ -1,0 +1,257 @@
+export type Locale = 'en' | 'ko';
+
+export interface Dictionary {
+  localeLabel: string;
+  languageEnglish: string;
+  languageKorean: string;
+  brandKicker: string;
+  updatedPrefix: string;
+  home: {
+    titleSuffix: string;
+    heroKicker: string;
+    fallbackDescription: string;
+    visitOrganizationProfile: string;
+    statsTitle: string;
+    statsNote: string;
+    statTotalRepositories: string;
+    statFeaturedRepositories: string;
+    statActiveRepositories: string;
+    statContributionReady: string;
+    statArchivedRepositories: string;
+    featuredTitle: string;
+    featuredNote: string;
+    featuredEmpty: string;
+    activityTitle: string;
+    activityNote: string;
+    activeNowTitle: string;
+    activeEmpty: string;
+    recentlyUpdatedTitle: string;
+    recentEmpty: string;
+    noLanguage: string;
+    categoriesTitle: string;
+    categoriesNote: string;
+    repositoriesCount: string;
+    contributionTagsTitle: string;
+    contributionTagsNote: string;
+    contributionTagsEmpty: string;
+  };
+  project: {
+    titleSuffix: string;
+    backToOverview: string;
+    detailSubtitle: string;
+    metadataAriaLabel: string;
+    metadataTitle: string;
+    metaRepository: string;
+    metaStars: string;
+    metaForks: string;
+    metaLicense: string;
+    metaLastPush: string;
+    notDeclared: string;
+    repositoryLink: string;
+    homepageLink: string;
+    contributionAtlasTitle: string;
+    contributionAtlasNote: string;
+    maintainersTitle: string;
+    maintainersEmpty: string;
+    contributionTagsTitle: string;
+    contributionTagsEmpty: string;
+    contributionSignalsTitle: string;
+    contributionSignalsEmpty: string;
+    taxonomyTitle: string;
+    taxonomyNote: string;
+    topicsTitle: string;
+    topicsEmpty: string;
+    techStackTitle: string;
+    techStackEmpty: string;
+    relatedTitle: string;
+    relatedNote: string;
+    relatedEmpty: string;
+  };
+  card: {
+    stars: string;
+    forks: string;
+    updatedPrefix: string;
+  };
+  unknownDate: string;
+}
+
+export const dictionaries: Record<Locale, Dictionary> = {
+  en: {
+    localeLabel: 'Language',
+    languageEnglish: 'English',
+    languageKorean: '한국어',
+    brandKicker: 'Open Source Atlas',
+    updatedPrefix: 'Updated',
+    home: {
+      titleSuffix: 'Open Source Atlas',
+      heroKicker: 'Organization Overview',
+      fallbackDescription: 'A generated atlas of repositories, contribution pathways, and project health.',
+      visitOrganizationProfile: 'Visit organization profile',
+      statsTitle: 'Atlas Statistics',
+      statsNote: 'Repository signals at a glance',
+      statTotalRepositories: 'Total Repositories',
+      statFeaturedRepositories: 'Featured Repositories',
+      statActiveRepositories: 'Active Repositories',
+      statContributionReady: 'Contribution Ready',
+      statArchivedRepositories: 'Archived Repositories',
+      featuredTitle: 'Featured Projects',
+      featuredNote: 'High-impact repositories in the organization atlas',
+      featuredEmpty: 'No featured projects yet.',
+      activityTitle: 'Active and Recent Projects',
+      activityNote: 'Live activity and latest delivery cadence',
+      activeNowTitle: 'Currently Active',
+      activeEmpty: 'No active projects listed.',
+      recentlyUpdatedTitle: 'Recently Updated',
+      recentEmpty: 'No recent update data available.',
+      noLanguage: 'n/a',
+      categoriesTitle: 'Repository Categories',
+      categoriesNote: 'Grouped by domain and responsibility',
+      repositoriesCount: 'repositories',
+      contributionTagsTitle: 'Contribution Tags',
+      contributionTagsNote: 'Common contributor entry points across projects',
+      contributionTagsEmpty: 'No contribution tags available.'
+    },
+    project: {
+      titleSuffix: 'Atlas',
+      backToOverview: 'Back to atlas overview',
+      detailSubtitle: 'Project Detail',
+      metadataAriaLabel: 'project metadata and contribution details',
+      metadataTitle: 'Project Metadata',
+      metaRepository: 'Repository',
+      metaStars: 'Stars',
+      metaForks: 'Forks',
+      metaLicense: 'License',
+      metaLastPush: 'Last push',
+      notDeclared: 'Not declared',
+      repositoryLink: 'Repository',
+      homepageLink: 'Homepage',
+      contributionAtlasTitle: 'Contribution Atlas',
+      contributionAtlasNote: 'Maintainers and contributor entry points',
+      maintainersTitle: 'Maintainers',
+      maintainersEmpty: 'No maintainers listed.',
+      contributionTagsTitle: 'Contribution Tags',
+      contributionTagsEmpty: 'No contribution tags listed.',
+      contributionSignalsTitle: 'Contribution Signals',
+      contributionSignalsEmpty: 'No contribution signals listed.',
+      taxonomyTitle: 'Taxonomy',
+      taxonomyNote: 'Topics and stack references',
+      topicsTitle: 'Topics',
+      topicsEmpty: 'No topics detected.',
+      techStackTitle: 'Tech Stack',
+      techStackEmpty: 'No stack metadata detected.',
+      relatedTitle: 'Related Repositories',
+      relatedNote: 'Known links in the organization graph',
+      relatedEmpty: 'No related repositories were declared.'
+    },
+    card: {
+      stars: 'stars',
+      forks: 'forks',
+      updatedPrefix: 'Updated'
+    },
+    unknownDate: 'Unknown'
+  },
+  ko: {
+    localeLabel: '언어',
+    languageEnglish: 'English',
+    languageKorean: '한국어',
+    brandKicker: '오픈소스 아틀라스',
+    updatedPrefix: '업데이트',
+    home: {
+      titleSuffix: '오픈소스 아틀라스',
+      heroKicker: '조직 개요',
+      fallbackDescription: '저장소, 기여 경로, 프로젝트 상태를 한눈에 보여주는 생성형 아틀라스입니다.',
+      visitOrganizationProfile: '조직 프로필 보기',
+      statsTitle: '아틀라스 통계',
+      statsNote: '저장소 신호를 한눈에 확인하세요',
+      statTotalRepositories: '전체 저장소',
+      statFeaturedRepositories: '추천 저장소',
+      statActiveRepositories: '활성 저장소',
+      statContributionReady: '기여 가능 저장소',
+      statArchivedRepositories: '보관 저장소',
+      featuredTitle: '추천 프로젝트',
+      featuredNote: '조직 아틀라스에서 영향력이 큰 저장소',
+      featuredEmpty: '아직 추천 프로젝트가 없습니다.',
+      activityTitle: '활성 및 최근 프로젝트',
+      activityNote: '실시간 활동과 최신 업데이트 흐름',
+      activeNowTitle: '현재 활성',
+      activeEmpty: '표시할 활성 프로젝트가 없습니다.',
+      recentlyUpdatedTitle: '최근 업데이트',
+      recentEmpty: '최근 업데이트 데이터가 없습니다.',
+      noLanguage: '없음',
+      categoriesTitle: '저장소 카테고리',
+      categoriesNote: '도메인과 역할 기준으로 분류',
+      repositoriesCount: '개 저장소',
+      contributionTagsTitle: '기여 태그',
+      contributionTagsNote: '프로젝트 전반에서 자주 보이는 기여 시작점',
+      contributionTagsEmpty: '기여 태그가 없습니다.'
+    },
+    project: {
+      titleSuffix: '아틀라스',
+      backToOverview: '아틀라스 개요로 돌아가기',
+      detailSubtitle: '프로젝트 상세',
+      metadataAriaLabel: '프로젝트 메타데이터 및 기여 정보',
+      metadataTitle: '프로젝트 메타데이터',
+      metaRepository: '저장소',
+      metaStars: '스타',
+      metaForks: '포크',
+      metaLicense: '라이선스',
+      metaLastPush: '마지막 푸시',
+      notDeclared: '미기재',
+      repositoryLink: '저장소',
+      homepageLink: '홈페이지',
+      contributionAtlasTitle: '기여 아틀라스',
+      contributionAtlasNote: '메인테이너와 기여 시작 지점',
+      maintainersTitle: '메인테이너',
+      maintainersEmpty: '등록된 메인테이너가 없습니다.',
+      contributionTagsTitle: '기여 태그',
+      contributionTagsEmpty: '등록된 기여 태그가 없습니다.',
+      contributionSignalsTitle: '기여 신호',
+      contributionSignalsEmpty: '등록된 기여 신호가 없습니다.',
+      taxonomyTitle: '분류',
+      taxonomyNote: '토픽과 기술 스택 참고',
+      topicsTitle: '토픽',
+      topicsEmpty: '감지된 토픽이 없습니다.',
+      techStackTitle: '기술 스택',
+      techStackEmpty: '기술 스택 메타데이터가 없습니다.',
+      relatedTitle: '연관 저장소',
+      relatedNote: '조직 그래프에서 확인된 연결',
+      relatedEmpty: '선언된 연관 저장소가 없습니다.'
+    },
+    card: {
+      stars: '스타',
+      forks: '포크',
+      updatedPrefix: '업데이트'
+    },
+    unknownDate: '알 수 없음'
+  }
+};
+
+export const normalizeBaseUrl = (rawBaseUrl: string): string =>
+  rawBaseUrl.endsWith('/') ? rawBaseUrl : `${rawBaseUrl}/`;
+
+export const homePath = (locale: Locale, rawBaseUrl: string): string => {
+  const baseUrl = normalizeBaseUrl(rawBaseUrl);
+  return locale === 'ko' ? `${baseUrl}ko/` : baseUrl;
+};
+
+export const projectPath = (locale: Locale, name: string, rawBaseUrl: string): string => {
+  const baseUrl = normalizeBaseUrl(rawBaseUrl);
+  return locale === 'ko' ? `${baseUrl}ko/projects/${name}/` : `${baseUrl}projects/${name}/`;
+};
+
+export const formatDateByLocale = (value: string | null, locale: Locale): string => {
+  if (!value) {
+    return dictionaries[locale].unknownDate;
+  }
+
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) {
+    return dictionaries[locale].unknownDate;
+  }
+
+  return new Intl.DateTimeFormat(locale === 'ko' ? 'ko-KR' : 'en', {
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit'
+  }).format(parsed);
+};
