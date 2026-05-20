@@ -1,0 +1,34 @@
+organization:
+  name: BSSM-OSS
+  description: 부산소프트웨어마이스터고 OSS 조직의 프로젝트 지도
+  url: https://github.com/BSSM-OSS
+repos:
+  maru:
+    featured: true
+    category: product
+    status: active
+    pitch: 입학 원서 작성 및 제출 서비스
+    maintainers:
+      - '@bssm-oss'
+    contribution:
+      - frontend
+      - backend
+      - docs
+    difficulty: medium
+    techStack:
+      - TypeScript
+      - Java
+      - Spring
+  jagalchi:
+    featured: true
+    category: education
+    status: active
+    pitch: 개발자 로드맵 에디터
+    contribution:
+      - frontend
+      - design
+      - docs
+    difficulty: hard
+    techStack:
+      - TypeScript
+      - React

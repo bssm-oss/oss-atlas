@@ -1,0 +1,51 @@
+{
+  "organization": "BSSM-OSS",
+  "fetchedAt": "2026-05-17T00:00:00.000Z",
+  "repos": [
+    {
+      "name": "maru",
+      "fullName": "BSSM-OSS/maru",
+      "description": "Admission application service for BSSM.",
+      "stars": 42,
+      "forks": 8,
+      "language": "TypeScript",
+      "archived": false,
+      "updatedAt": "2026-05-12T09:00:00.000Z",
+      "pushedAt": "2026-05-16T09:00:00.000Z",
+      "topics": ["good-first-issue", "school", "service"],
+      "license": "MIT",
+      "url": "https://github.com/BSSM-OSS/maru",
+      "homepageUrl": null
+    },
+    {
+      "name": "jagalchi",
+      "fullName": "BSSM-OSS/jagalchi",
+      "description": "Roadmap editor for student developers.",
+      "stars": 25,
+      "forks": 5,
+      "language": "TypeScript",
+      "archived": false,
+      "updatedAt": "2026-05-01T13:00:00.000Z",
+      "pushedAt": "2026-05-08T13:00:00.000Z",
+      "topics": ["help-wanted", "education"],
+      "license": "Apache-2.0",
+      "url": "https://github.com/BSSM-OSS/jagalchi",
+      "homepageUrl": null
+    },
+    {
+      "name": "old-lab",
+      "fullName": "BSSM-OSS/old-lab",
+      "description": "Archived experiment repository.",
+      "stars": 3,
+      "forks": 1,
+      "language": "Python",
+      "archived": true,
+      "updatedAt": "2025-08-10T09:00:00.000Z",
+      "pushedAt": null,
+      "topics": [],
+      "license": null,
+      "url": "https://github.com/BSSM-OSS/old-lab",
+      "homepageUrl": null
+    }
+  ]
+}
