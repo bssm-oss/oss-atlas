@@ -1,43 +1,51 @@
 ---
 import '../styles/theme.css';
+import { dictionaries, formatDateByLocale, homePath, projectPath, type Locale } from '../lib/i18n';
 
 interface Props {
   title: string;
   description?: string;
   organizationName: string;
   generatedAt: string;
+  lang?: Locale;
+  currentProjectName?: string;
 }
 
-const { title, description, organizationName, generatedAt } = Astro.props;
+const { title, description, organizationName, generatedAt, lang = 'en', currentProjectName } = Astro.props;
 const rawBaseUrl = import.meta.env.BASE_URL;
-const baseUrl = rawBaseUrl.endsWith('/') ? rawBaseUrl : `${rawBaseUrl}/`;
-const generatedLabel = new Date(generatedAt);
-const generatedText = Number.isNaN(generatedLabel.getTime())
-  ? generatedAt
-  : new Intl.DateTimeFormat('en', {
-      year: 'numeric',
-      month: 'short',
-      day: '2-digit'
-    }).format(generatedLabel);
+const t = dictionaries[lang];
+const generatedText = formatDateByLocale(generatedAt, lang);
+const englishPath = currentProjectName
+  ? projectPath('en', currentProjectName, rawBaseUrl)
+  : homePath('en', rawBaseUrl);
+const koreanPath = currentProjectName
+  ? projectPath('ko', currentProjectName, rawBaseUrl)
+  : homePath('ko', rawBaseUrl);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href={`${baseUrl}favicon.svg`} />
+    <link rel="icon" type="image/svg+xml" href={`${homePath('en', rawBaseUrl)}favicon.svg`} />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
   </head>
   <body>
     <header class="page-header">
       <div class="header-shell">
-        <a class="brand" href={baseUrl}>
-          <span class="brand-kicker">Open Source Atlas</span>
+        <a class="brand" href={homePath(lang, rawBaseUrl)}>
+          <span class="brand-kicker">{t.brandKicker}</span>
           <strong class="brand-name">{organizationName}</strong>
         </a>
-        <p class="generated-at">Updated {generatedText}</p>
+        <div style="display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; justify-content: flex-end;">
+          <p class="generated-at">{t.updatedPrefix} {generatedText}</p>
+          <nav class="project-meta" aria-label={t.localeLabel}>
+            <a class="tag" href={englishPath} aria-current={lang === 'en' ? 'page' : undefined} style="text-decoration: none;">{t.languageEnglish}</a>
+            <a class="tag" href={koreanPath} aria-current={lang === 'ko' ? 'page' : undefined} style="text-decoration: none;">{t.languageKorean}</a>
+          </nav>
+        </div>
       </div>
     </header>
     <main>

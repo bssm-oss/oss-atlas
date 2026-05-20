@@ -1,16 +1,16 @@
 ---
 import type { AtlasProject } from '../types/atlas';
-import { formatDate } from '../lib/atlas';
+import { dictionaries, formatDateByLocale, projectPath, type Locale } from '../lib/i18n';
 
 interface Props {
   project: AtlasProject;
   showCategory?: boolean;
+  lang?: Locale;
 }
 
-const { project, showCategory = true } = Astro.props;
-const rawBaseUrl = import.meta.env.BASE_URL;
-const baseUrl = rawBaseUrl.endsWith('/') ? rawBaseUrl : `${rawBaseUrl}/`;
-const projectHref = `${baseUrl}projects/${project.name}/`;
+const { project, showCategory = true, lang = 'en' } = Astro.props;
+const t = dictionaries[lang];
+const projectHref = projectPath(lang, project.name, import.meta.env.BASE_URL);
 ---
 
 <article class="project-card">
@@ -27,8 +27,8 @@ const projectHref = `${baseUrl}projects/${project.name}/`;
     {showCategory && <span class="tag">{project.category}</span>}
     {project.language && <span class="tag">{project.language}</span>}
     {project.difficulty && <span class="tag">{project.difficulty}</span>}
-    <span class="tag">{project.stars} stars</span>
-    <span class="tag">{project.forks} forks</span>
-    <span class="tag">Updated {formatDate(project.pushedAt ?? project.updatedAt)}</span>
+    <span class="tag">{project.stars} {t.card.stars}</span>
+    <span class="tag">{project.forks} {t.card.forks}</span>
+    <span class="tag">{t.card.updatedPrefix} {formatDateByLocale(project.pushedAt ?? project.updatedAt, lang)}</span>
   </div>
 </article>

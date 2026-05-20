@@ -1,13 +1,17 @@
 ---
+import type { Locale } from '../lib/i18n';
+
 interface Props {
   label: string;
   value: number;
+  lang?: Locale;
 }
 
-const { label, value } = Astro.props;
+const { label, value, lang = 'en' } = Astro.props;
+const numberLocale = lang === 'ko' ? 'ko-KR' : 'en-US';
 ---
 
 <article class="stat-card">
   <p class="stat-label">{label}</p>
-  <p class="stat-value">{value.toLocaleString('en-US')}</p>
+  <p class="stat-value">{value.toLocaleString(numberLocale)}</p>
 </article>
