@@ -5,3 +5,4 @@ dist/
 apps/web/dist/
 *.tsbuildinfo
 .DS_Store
+.playwright-mcp/
