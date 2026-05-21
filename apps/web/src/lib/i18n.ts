@@ -35,6 +35,41 @@ export interface Dictionary {
     contributionTagsNote: string;
     contributionTagsEmpty: string;
   };
+  live: {
+    title: string;
+    subtitle: string;
+    description: string;
+    orgLabel: string;
+    orgPlaceholder: string;
+    submitLabel: string;
+    loading: string;
+    emptyTitle: string;
+    emptyDescription: string;
+    resultTitle: string;
+    resultCount: string;
+    statRepositories: string;
+    statStars: string;
+    statForks: string;
+    statLanguage: string;
+    statArchived: string;
+    statUpdated: string;
+    repoCardStars: string;
+    repoCardForks: string;
+    repoCardLanguage: string;
+    repoCardUpdated: string;
+    repoCardLicense: string;
+    repoCardTopics: string;
+    repoCardOpen: string;
+    repoCardArchived: string;
+    errorTitle: string;
+    errorGeneric: string;
+    errorNotFound: string;
+    errorRateLimit: string;
+    limitationNote: string;
+    limitationPublicOnly: string;
+    limitationRateLimit: string;
+    limitationNoSavedCuration: string;
+  };
   project: {
     titleSuffix: string;
     backToOverview: string;
@@ -111,6 +146,41 @@ export const dictionaries: Record<Locale, Dictionary> = {
       contributionTagsNote: 'Common contributor entry points across projects',
       contributionTagsEmpty: 'No contribution tags available.'
     },
+    live: {
+      title: 'Live Organization Explorer',
+      subtitle: 'Map any public GitHub organization',
+      description: 'Enter an organization name to browse its public repositories live.',
+      orgLabel: 'GitHub organization',
+      orgPlaceholder: 'e.g. vercel',
+      submitLabel: 'Explore',
+      loading: 'Loading public repositories…',
+      emptyTitle: 'No organization loaded yet',
+      emptyDescription: 'Search a public GitHub organization to see its repositories here.',
+      resultTitle: 'Live results',
+      resultCount: 'repositories found',
+      statRepositories: 'Repositories',
+      statStars: 'Stars',
+      statForks: 'Forks',
+      statLanguage: 'Primary language',
+      statArchived: 'Archived',
+      statUpdated: 'Recently updated',
+      repoCardStars: 'stars',
+      repoCardForks: 'forks',
+      repoCardLanguage: 'language',
+      repoCardUpdated: 'updated',
+      repoCardLicense: 'license',
+      repoCardTopics: 'topics',
+      repoCardOpen: 'Open repository',
+      repoCardArchived: 'Archived',
+      errorTitle: 'Could not load repositories',
+      errorGeneric: 'Something went wrong while fetching GitHub data.',
+      errorNotFound: 'That organization was not found.',
+      errorRateLimit: 'GitHub rate limit reached. Try again later.',
+      limitationNote: 'Limitations',
+      limitationPublicOnly: 'Public repositories only.',
+      limitationRateLimit: 'GitHub API rate limits still apply.',
+      limitationNoSavedCuration: 'This MVP does not save curation or manual edits.'
+    },
     project: {
       titleSuffix: 'Atlas',
       backToOverview: 'Back to atlas overview',
@@ -184,6 +254,41 @@ export const dictionaries: Record<Locale, Dictionary> = {
       contributionTagsTitle: '기여 태그',
       contributionTagsNote: '프로젝트 전반에서 자주 보이는 기여 시작점',
       contributionTagsEmpty: '기여 태그가 없습니다.'
+    },
+    live: {
+      title: '실시간 조직 탐색기',
+      subtitle: '공개 GitHub 조직을 바로 살펴보기',
+      description: '조직 이름을 입력하면 공개 저장소를 실시간으로 확인할 수 있습니다.',
+      orgLabel: 'GitHub 조직',
+      orgPlaceholder: '예: vercel',
+      submitLabel: '탐색',
+      loading: '공개 저장소를 불러오는 중…',
+      emptyTitle: '아직 조직이 선택되지 않았습니다',
+      emptyDescription: '공개 GitHub 조직을 검색하면 저장소 목록이 여기에 표시됩니다.',
+      resultTitle: '실시간 결과',
+      resultCount: '개 저장소 발견',
+      statRepositories: '저장소',
+      statStars: '스타',
+      statForks: '포크',
+      statLanguage: '주요 언어',
+      statArchived: '보관됨',
+      statUpdated: '최근 업데이트',
+      repoCardStars: '스타',
+      repoCardForks: '포크',
+      repoCardLanguage: '언어',
+      repoCardUpdated: '업데이트',
+      repoCardLicense: '라이선스',
+      repoCardTopics: '토픽',
+      repoCardOpen: '저장소 열기',
+      repoCardArchived: '보관됨',
+      errorTitle: '저장소를 불러오지 못했습니다',
+      errorGeneric: 'GitHub 데이터를 가져오는 중 문제가 생겼습니다.',
+      errorNotFound: '해당 조직을 찾을 수 없습니다.',
+      errorRateLimit: 'GitHub 요청 제한에 도달했습니다. 잠시 후 다시 시도하세요.',
+      limitationNote: '제한 사항',
+      limitationPublicOnly: '공개 저장소만 표시합니다.',
+      limitationRateLimit: 'GitHub API 요청 제한이 적용됩니다.',
+      limitationNoSavedCuration: '이 MVP는 별도 큐레이션이나 수동 수정 내용을 저장하지 않습니다.'
     },
     project: {
       titleSuffix: '아틀라스',

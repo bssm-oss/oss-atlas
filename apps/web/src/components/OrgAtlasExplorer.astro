@@ -1,0 +1,49 @@
+---
+import { dictionaries, type Locale } from '../lib/i18n';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'en' } = Astro.props;
+const t = dictionaries[lang].live;
+---
+
+<section class="live-explorer section" aria-labelledby="live-explorer-title" data-live-atlas data-live-copy={JSON.stringify(t)} data-live-lang={lang}>
+  <div class="live-explorer-panel">
+    <div class="section-heading live-explorer-heading">
+      <div>
+        <p class="hero-kicker">{t.subtitle}</p>
+        <h2 class="section-title" id="live-explorer-title">{t.title}</h2>
+        <p class="section-note">{t.description}</p>
+      </div>
+    </div>
+
+    <form class="live-search" data-live-form>
+      <label class="live-label" for={`live-org-${lang}`}>{t.orgLabel}</label>
+      <div class="live-search-row">
+        <input id={`live-org-${lang}`} class="live-input" name="org" type="text" inputmode="text" autocomplete="off" spellcheck="false" placeholder={t.orgPlaceholder} data-live-input />
+        <button class="live-submit" type="submit" data-live-submit>{t.submitLabel}</button>
+      </div>
+    </form>
+
+    <div class="live-limitations" aria-label={t.limitationNote}>
+      <span class="tag">{t.limitationPublicOnly}</span>
+      <span class="tag">{t.limitationRateLimit}</span>
+      <span class="tag">{t.limitationNoSavedCuration}</span>
+    </div>
+
+    <div class="live-status" data-live-status>
+      <div class="empty-note">
+        <strong>{t.emptyTitle}</strong>
+        <p>{t.emptyDescription}</p>
+      </div>
+    </div>
+
+    <div class="live-results" data-live-results hidden></div>
+  </div>
+</section>
+
+<script>
+  import '../lib/live-atlas-explorer';
+</script>

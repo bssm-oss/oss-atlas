@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import OrgAtlasExplorer from '../components/OrgAtlasExplorer.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import StatCard from '../components/StatCard.astro';
 import {
@@ -24,6 +25,8 @@ const projectHref = (name: string) => projectPath(lang, name, import.meta.env.BA
   generatedAt={atlas.generatedAt}
   lang={lang}
 >
+  <OrgAtlasExplorer lang={lang} />
+
   <section class="hero" aria-labelledby="organization-heading">
     <p class="hero-kicker">{t.home.heroKicker}</p>
     <h1 id="organization-heading">{atlas.organization.name}</h1>
@@ -33,6 +36,7 @@ const projectHref = (name: string) => projectPath(lang, name, import.meta.env.BA
         <a href={atlas.organization.url}>{t.home.visitOrganizationProfile}</a>
       </p>
     )}
+    <p class="tag" style="margin-top: var(--space-4); width: fit-content;">Generated sample atlas section</p>
   </section>
 
   <section class="section" aria-labelledby="stats-title">
