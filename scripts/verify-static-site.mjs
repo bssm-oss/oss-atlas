@@ -6,6 +6,9 @@ const checks = [
     file: 'apps/web/dist/index.html',
     expected: [
       'Open Source Atlas',
+      'Live Organization Explorer',
+      'Map any public GitHub organization',
+      'GitHub organization',
       'Featured Projects',
       'Contribution Tags',
       'atlas-web',
@@ -28,6 +31,9 @@ const checks = [
     file: 'apps/web/dist/ko/index.html',
     expected: [
       '오픈소스 아틀라스',
+      '실시간 조직 탐색기',
+      '공개 GitHub 조직을 바로 살펴보기',
+      'GitHub 조직',
       '조직 개요',
       '추천 프로젝트',
       '기여 태그',
