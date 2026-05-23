@@ -39,11 +39,11 @@ const koreanPath = currentProjectName
           <span class="brand-kicker">{t.brandKicker}</span>
           <strong class="brand-name">{organizationName}</strong>
         </a>
-        <div style="display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; justify-content: flex-end;">
+        <div class="header-meta">
           <p class="generated-at">{t.updatedPrefix} {generatedText}</p>
-          <nav class="project-meta" aria-label={t.localeLabel}>
-            <a class="tag" href={englishPath} aria-current={lang === 'en' ? 'page' : undefined} style="text-decoration: none;">{t.languageEnglish}</a>
-            <a class="tag" href={koreanPath} aria-current={lang === 'ko' ? 'page' : undefined} style="text-decoration: none;">{t.languageKorean}</a>
+          <nav class="locale-switcher" aria-label={t.localeLabel}>
+            <a class="tag" href={englishPath} aria-current={lang === 'en' ? 'page' : undefined}>{t.languageEnglish}</a>
+            <a class="tag" href={koreanPath} aria-current={lang === 'ko' ? 'page' : undefined}>{t.languageKorean}</a>
           </nav>
         </div>
       </div>
